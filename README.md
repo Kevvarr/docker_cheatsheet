@@ -1,5 +1,4 @@
 # 🐳 Docker Command Cheat Sheet for personal use
-![hN4lt](https://miro.medium.com/v2/resize:fit:1372/0*X34tDynHLvheJOKN)
 
 ---
 
@@ -68,7 +67,7 @@
 ---
 
 ## 🧭 Docker Networking Types
-
+![hN4lt](https://miro.medium.com/v2/resize:fit:1372/0*X34tDynHLvheJOKN)
 | Network Type | Description |
 |--------------|-------------|
 | `bridge` (default) | Default for standalone containers. Provides NAT'd network via a bridge interface. |
