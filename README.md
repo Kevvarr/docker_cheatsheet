@@ -2,149 +2,6 @@
 
 ---
 
-## 🚀 Basic Docker Commands
-
-| Command | Description |
-|--------|-------------|
-| `docker version` | Show Docker version |
-| `docker info` | Display system-wide Docker info |
-| `docker help` | Show general Docker help |
-
----
-
-## 📦 Image Management
-
-| Command | Description |
-|--------|-------------|
-| `docker pull <image>` | Download an image from registry |
-| `docker images` | List all local images |
-| `docker rmi <image>` | Remove an image |
-| `docker build -t <name>:<tag> .` | Build image from Dockerfile |
-| `docker build --no-cache -t <name>:<tag> .` | Build without using cache |
-| `docker image prune -a` | Remove all unused images |
-| `docker image ls -a` | Show all images, including intermediate |
-
----
-
-## 🧱 Container Management
-
-| Command | Description |
-|--------|-------------|
-| `docker run -it <image> bash` | Run a container interactively |
-| `docker run -d -p 8080:80 <image>` | Run container in detached mode with port mapping |
-| `docker run --name <name> <image>` | Run container with custom name |
-| `docker run --rm <image>` | Auto-remove container after it exits |
-| `docker run -e VAR=value <image>` | Pass environment variables |
-| `docker run --mount type=bind,source="$(pwd)",target=/app <image>` | Mount a host directory |
-| `docker ps` | List running containers |
-| `docker ps -a` | List all containers (including stopped) |
-| `docker stop <id\|name>` | Stop container |
-| `docker start <id\|name>` | Start container |
-| `docker restart <id\|name>` | Restart container |
-| `docker rm <id\|name>` | Remove a container |
-| `docker exec -it <id\|name> bash` | Open shell in running container |
-| `docker logs -f <id\|name>` | Follow logs of a container |
-
----
-
-## 🗃️ Volume Management
-
-| Command | Description |
-|--------|-------------|
-| `docker volume create <name>` | Create a new volume |
-| `docker volume ls` | List all volumes |
-| `docker volume inspect <name>` | View details of a volume |
-| `docker volume rm <name>` | Remove a volume |
-| `docker run -v <volume>:/data <image>` | Mount volume into container |
-| `docker run --mount source=<volume>,target=/data <image>` | Alternative mounting method |
-
----
-
-## 🌐 Network Management
-
-| Command | Description |
-|--------|-------------|
-| `docker network ls` | List all Docker networks |
-| `docker network create <name>` | Create a custom network |
-| `docker network inspect <name>` | Show network details |
-| `docker network rm <name>` | Remove a network |
-| `docker run --network=<name> <image>` | Connect container to a specific network |
-| `docker network create --driver bridge <name>` | Create bridge network |
-| `docker network create --driver overlay <name>` | Create overlay network |
-
----
-
-## 🧭 Docker Networking Types
-
-![Networking Types](https://miro.medium.com/v2/resize:fit:1372/0*X34tDynHLvheJOKN)
-
-| Network Type | Description |
-|--------------|-------------|
-| `bridge` (default) | Default for standalone containers. Provides NAT'd network via a bridge interface. |
-| `host` | Shares host’s networking namespace. No isolation—container uses host’s IP and ports. |
-| `none` | No network access. Container is fully isolated from networking. |
-| `overlay` | Multi-host network using Docker Swarm or other orchestrators. |
-| `macvlan` | Assigns a MAC address to the container so it appears as a physical device on the network. |
-| `ipvlan` | Like `macvlan`, but relies on IP address isolation. |
-
-> 💡 To specify a network:  
-> `docker run --network=host <image>`  
-> `docker network create --driver=overlay my_overlay_net`
-
----
-
-## 📤 Registry & Docker Hub
-
-| Command | Description |
-|--------|-------------|
-| `docker login` | Authenticate to Docker Hub |
-| `docker tag <local> <user>/<repo>:<tag>` | Tag image for push |
-| `docker push <user>/<repo>:<tag>` | Push image to registry |
-| `docker pull <user>/<repo>:<tag>` | Pull image from registry |
-
----
-
-## 🧹 Cleanup & Pruning
-
-| Command | Description |
-|--------|-------------|
-| `docker system prune` | Clean up unused resources (images, containers, volumes) |
-| `docker system prune -a` | Clean up unused resources + all unused images |
-| `docker container prune` | Remove all stopped containers |
-| `docker image prune` | Remove unused images |
-| `docker volume prune` | Remove unused volumes |
-| `docker builder prune` | Remove build cache |
-
----
-
-## 🕵️ Debug & Inspect
-
-| Command | Description |
-|--------|-------------|
-| `docker inspect <id|name>` | Detailed inspection (JSON) |
-| `docker diff <id|name>` | Changes made to container filesystem |
-| `docker top <id|name>` | Running processes in container |
-| `docker stats` | Real-time resource usage stats |
-| `docker events` | Stream Docker events in real-time |
-
----
-
-## 🧰 Useful Options
-
-| Option | Description |
-|--------|-------------|
-| `-d` | Detached mode (run in background) |
-| `-it` | Interactive + TTY |
-| `--rm` | Auto-remove container after exit |
-| `--name <name>` | Name the container |
-| `-v <vol>:/path` | Bind volume |
-| `-p host:container` | Port mapping |
-| `--env KEY=val` | Set environment variable |
-| `--network <name>` | Use specific network |
-| `--mount type=bind|volume,...` | More control over mounts |
-
----
-
 ## 🛠 Docker Compose
 
 | Command | Description |
@@ -159,3 +16,113 @@
 | `docker-compose restart` | Restart services |
 
 ---
+
+## 📄 Docker Compose File Structure
+
+| Section | Description |
+|---------|-------------|
+| `version` | Specifies the Compose file format (e.g., `3.9`). |
+| `services` | Defines each container in the application. |
+| `volumes` | Named or bind-mounted volumes for persistent data. |
+| `networks` | Custom bridge networks for isolated communication. |
+
+---
+
+## ⚙️ Service Configuration Options (With Examples)
+
+| Key | Description | Example |
+|-----|-------------|---------|
+| `image` | The Docker image to use. | `image: nginx:latest` |
+| `build` | Build from a Dockerfile. | `build: ./backend` |
+| `container_name` | Name your container. | `container_name: my_backend` |
+| `ports` | Map host:container ports. | `ports: ["8080:80"]` |
+| `volumes` | Mount host directories or named volumes. | `volumes: ["./data:/data"]` |
+| `environment` | Set environment variables. | `environment: ["NODE_ENV=production", "PORT=3000"]` |
+| `env_file` | Load env variables from a file. | `env_file: .env` |
+| `depends_on` | Define service start order. | `depends_on: ["db"]` |
+| `networks` | Connect to one or more networks. | `networks: ["frontend"]` |
+| `restart` | Restart policy on failure or stop. | `restart: unless-stopped` |
+| `command` | Override default container command. | `command: ["npm", "start"]` |
+| `entrypoint` | Override Docker image entrypoint. | `entrypoint: /entrypoint.sh` |
+| `logging` | Configure logging driver. | `logging: { driver: "json-file" }` |
+| `healthcheck` | Check if container is healthy. | `healthcheck: { test: ["CMD", "curl", "-f", "http://localhost"], interval: 30s }` |
+
+---
+
+## 🧠 Advanced Service Options (With Examples)
+
+| Key | Description | Example |
+|-----|-------------|---------|
+| `labels` | Add metadata labels to containers. | `labels: ["app=backend", "tier=api"]` |
+| `cap_add` | Add Linux capabilities. | `cap_add: ["NET_ADMIN", "SYS_TIME"]` |
+| `cap_drop` | Remove Linux capabilities. | `cap_drop: ["ALL"]` |
+| `ulimits` | Set resource limits. | `ulimits: { nofile: 65535 }` |
+| `dns` | Specify custom DNS servers. | `dns: ["8.8.8.8", "1.1.1.1"]` |
+| `extra_hosts` | Add entries to `/etc/hosts`. | `extra_hosts: ["local.dev:127.0.0.1"]` |
+| `secrets` | Use Docker secrets (Swarm only). | `secrets: ["db_password"]` |
+| `configs` | External config files (Swarm). | `configs: ["nginx_config"]` |
+| `security_opt` | Security options like seccomp. | `security_opt: ["no-new-privileges:true"]` |
+| `tmpfs` | Mount tmpfs (in-memory). | `tmpfs: /run` |
+| `read_only` | Mount container root as read-only. | `read_only: true` |
+| `stdin_open` | Keep STDIN open (for `docker attach`). | `stdin_open: true` |
+| `tty` | Allocate a pseudo-TTY. | `tty: true` |
+| `working_dir` | Set the working directory in container. | `working_dir: /app` |
+| `user` | Run container as specific user. | `user: "1000:1000"` |
+| `shm_size` | Set shared memory size. | `shm_size: 256m` |
+
+---
+
+## 🧪 Example: MongoDB + Backend Service
+
+```yaml
+version: "3.9"
+
+services:
+  mongodb:
+    image: mongo:6
+    container_name: mongo_db
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  backend:
+    build: ./backend
+    container_name: backend_app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      MONGO_URI: mongodb://root:example@mongodb:27017
+      NODE_ENV: production
+    depends_on:
+      - mongodb
+    networks:
+      - app_network
+    volumes:
+      - ./backend:/app
+    working_dir: /app
+    command: ["npm", "run", "start"]
+    tty: true
+    stdin_open: true
+
+volumes:
+  mongo_data:
+
+networks:
+  app_network:
+```
