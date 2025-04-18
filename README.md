@@ -1,4 +1,4 @@
-# 🐳 Docker Command Cheat Sheet for personal use
+# 🐳 Docker Command Cheat Sheet for Personal Use
 
 ---
 
@@ -20,7 +20,9 @@
 | `docker images` | List all local images |
 | `docker rmi <image>` | Remove an image |
 | `docker build -t <name>:<tag> .` | Build image from Dockerfile |
-| `docker image prune` | Remove dangling images |
+| `docker build --no-cache -t <name>:<tag> .` | Build without using cache |
+| `docker image prune -a` | Remove all unused images |
+| `docker image ls -a` | Show all images, including intermediate |
 
 ---
 
@@ -31,6 +33,9 @@
 | `docker run -it <image> bash` | Run a container interactively |
 | `docker run -d -p 8080:80 <image>` | Run container in detached mode with port mapping |
 | `docker run --name <name> <image>` | Run container with custom name |
+| `docker run --rm <image>` | Auto-remove container after it exits |
+| `docker run -e VAR=value <image>` | Pass environment variables |
+| `docker run --mount type=bind,source="$(pwd)",target=/app <image>` | Mount a host directory |
 | `docker ps` | List running containers |
 | `docker ps -a` | List all containers (including stopped) |
 | `docker stop <id\|name>` | Stop container |
@@ -51,6 +56,7 @@
 | `docker volume inspect <name>` | View details of a volume |
 | `docker volume rm <name>` | Remove a volume |
 | `docker run -v <volume>:/data <image>` | Mount volume into container |
+| `docker run --mount source=<volume>,target=/data <image>` | Alternative mounting method |
 
 ---
 
@@ -62,12 +68,16 @@
 | `docker network create <name>` | Create a custom network |
 | `docker network inspect <name>` | Show network details |
 | `docker network rm <name>` | Remove a network |
-| `docker run --network=<name> <image>` | Connect container to a network |
+| `docker run --network=<name> <image>` | Connect container to a specific network |
+| `docker network create --driver bridge <name>` | Create bridge network |
+| `docker network create --driver overlay <name>` | Create overlay network |
 
 ---
 
 ## 🧭 Docker Networking Types
-![hN4lt](https://miro.medium.com/v2/resize:fit:1372/0*X34tDynHLvheJOKN)
+
+![Networking Types](https://miro.medium.com/v2/resize:fit:1372/0*X34tDynHLvheJOKN)
+
 | Network Type | Description |
 |--------------|-------------|
 | `bridge` (default) | Default for standalone containers. Provides NAT'd network via a bridge interface. |
@@ -99,9 +109,11 @@
 | Command | Description |
 |--------|-------------|
 | `docker system prune` | Clean up unused resources (images, containers, volumes) |
+| `docker system prune -a` | Clean up unused resources + all unused images |
 | `docker container prune` | Remove all stopped containers |
 | `docker image prune` | Remove unused images |
 | `docker volume prune` | Remove unused volumes |
+| `docker builder prune` | Remove build cache |
 
 ---
 
@@ -113,6 +125,7 @@
 | `docker diff <id|name>` | Changes made to container filesystem |
 | `docker top <id|name>` | Running processes in container |
 | `docker stats` | Real-time resource usage stats |
+| `docker events` | Stream Docker events in real-time |
 
 ---
 
@@ -128,6 +141,7 @@
 | `-p host:container` | Port mapping |
 | `--env KEY=val` | Set environment variable |
 | `--network <name>` | Use specific network |
+| `--mount type=bind|volume,...` | More control over mounts |
 
 ---
 
@@ -140,16 +154,8 @@
 | `docker-compose build` | Build images |
 | `docker-compose logs -f` | Follow service logs |
 | `docker-compose exec <svc> bash` | Open shell in service container |
+| `docker-compose ps` | List status of services |
+| `docker-compose stop` | Stop services |
+| `docker-compose restart` | Restart services |
 
 ---
-
-## 📚 Helpful Resources
-
-| Resource | Link |
-|---------|------|
-| Docker Docs | [https://docs.docker.com/](https://docs.docker.com/) |
-| Docker CLI Reference | [https://docs.docker.com/engine/reference/commandline/cli/](https://docs.docker.com/engine/reference/commandline/cli/) |
-
----
-
-✅ With these commands, you're well on your way to mastering containerization with Docker!
