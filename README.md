@@ -33,12 +33,12 @@
 | `docker run --name <name> <image>` | Run container with custom name |
 | `docker ps` | List running containers |
 | `docker ps -a` | List all containers (including stopped) |
-| `docker stop <id|name>` | Stop container |
-| `docker start <id|name>` | Start container |
-| `docker restart <id|name>` | Restart container |
-| `docker rm <id|name>` | Remove a container |
-| `docker exec -it <id|name> bash` | Open shell in running container |
-| `docker logs -f <id|name>` | Follow logs of a container |
+| `docker stop <id\|name>` | Stop container |
+| `docker start <id\|name>` | Start container |
+| `docker restart <id\|name>` | Restart container |
+| `docker rm <id\|name>` | Remove a container |
+| `docker exec -it <id\|name> bash` | Open shell in running container |
+| `docker logs -f <id\|name>` | Follow logs of a container |
 
 ---
 
