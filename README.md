@@ -23,6 +23,8 @@
 | `docker build --no-cache -t <name>:<tag> .` | Build without using cache |
 | `docker image prune -a` | Remove all unused images |
 | `docker image ls -a` | Show all images, including intermediate |
+| `docker commit <container> <image>:<tag>` | Create a new image from a container’s changes |
+
 
 ---
 
@@ -121,9 +123,9 @@
 
 | Command | Description |
 |--------|-------------|
-| `docker inspect <id|name>` | Detailed inspection (JSON) |
-| `docker diff <id|name>` | Changes made to container filesystem |
-| `docker top <id|name>` | Running processes in container |
+| `docker inspect <id\|name>` | Detailed inspection (JSON) |
+| `docker diff <id\|name>` | Changes made to container filesystem |
+| `docker top <id\|name>` | Running processes in container |
 | `docker stats` | Real-time resource usage stats |
 | `docker events` | Stream Docker events in real-time |
 
@@ -141,7 +143,7 @@
 | `-p host:container` | Port mapping |
 | `--env KEY=val` | Set environment variable |
 | `--network <name>` | Use specific network |
-| `--mount type=bind|volume,...` | More control over mounts |
+| `--mount type=bind\|volume` | More control over mounts |
 
 ---
 
