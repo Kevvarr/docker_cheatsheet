@@ -120,7 +120,7 @@ services:
 ---
 
 ## ➡️ Use a Custom Environment File
-1. If your env file is named differently (e.g., myvars.env):
+If your env file is named differently (e.g., myvars.env):
 ```yaml
 services:
   app:
@@ -142,6 +142,26 @@ services:
 configs:
   nginx_config:
     file: ./nginx.conf
+```
+
+➡️ Using Docker Compose Secrets
+1. Create the secrets file: 
+```
+mkdir secrets
+echo "secretpassword" > secrets/my_secret.txt
+```
+
+2. Configure the compose.yaml to use it:
+```yaml
+services:
+  app:
+    image: myapp:latest
+    secrets:
+      - my_db_password
+
+secrets:
+  my_db_password:
+    file: ./secrets/my_secret.txt
 ```
 
 ---
