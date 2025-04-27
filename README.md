@@ -147,17 +147,31 @@
 
 ---
 
-## 🛠 Docker Compose
+## 🛠 Docker Compose (V2 Syntax)
 
 | Command | Description |
 |--------|-------------|
-| `docker-compose up -d` | Start services in detached mode |
-| `docker-compose down` | Stop and remove containers, networks |
-| `docker-compose build` | Build images |
-| `docker-compose logs -f` | Follow service logs |
-| `docker-compose exec <svc> bash` | Open shell in service container |
-| `docker-compose ps` | List status of services |
-| `docker-compose stop` | Stop services |
-| `docker-compose restart` | Restart services |
+| `docker compose up -d` | Start services in detached mode |
+| `docker compose up --build` | Build images before starting containers |
+| `docker compose down` | Stop and remove containers, networks |
+| `docker compose down --volumes` | Also remove named volumes |
+| `docker compose build` | Build images |
+| `docker compose build --no-cache` | Build images without using cache |
+| `docker compose logs` | View service logs |
+| `docker compose logs -f` | Follow service logs |
+| `docker compose logs -f --tail=100` | Show last 100 lines and follow logs |
+| `docker compose exec <svc> bash` | Open bash shell in service container |
+| `docker compose exec <svc> sh` | Open sh shell (useful for Alpine images) |
+| `docker compose run --rm <svc> <cmd>` | Run a one-off command and remove container |
+| `docker compose run -e VAR=value <svc> <cmd>` | Run service with custom environment variable |
+| `docker compose ps` | List status of services |
+| `docker compose config` | Validate and view the full configuration |
+| `docker compose stop` | Stop services |
+| `docker compose start` | Start existing services |
+| `docker compose restart` | Restart services |
+| `docker compose pull` | Pull service images |
+| `docker compose push` | Push service images |
+| `docker compose top` | Display the running processes |
+| `docker compose version` | Show Docker Compose version |
 
 ---
