@@ -144,7 +144,7 @@ configs:
     file: ./nginx.conf
 ```
 
-➡️ Using Docker Compose Secrets
+## ➡️ Using Docker Compose Secrets
 1. Create the secrets file: 
 ```
 mkdir secrets
