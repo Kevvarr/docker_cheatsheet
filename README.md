@@ -72,6 +72,80 @@
 
 ---
 
+## ➡️ Most simple docker compose yaml
+
+```yaml
+version: "3.8"
+
+services:
+  app:
+    image: myapp:latest
+    ports:
+      - "8080:80"
+```
+
+---
+
+## ➡️ Setup a Volume (for data persistence)
+
+```yaml
+services:
+  db:
+    image: postgres:14
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
+```
+
+---
+
+## ➡️ Use an Environment File
+1. Create a .env file: 
+```
+DB_USER=admin
+DB_PASS=secret
+```
+2. Reference it automatically in your compose.yml:
+```yaml
+services:
+  db:
+    image: postgres:14
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+```
+
+---
+
+## ➡️ Use a Custom Environment File
+1. If your env file is named differently (e.g., myvars.env):
+```yaml
+services:
+  app:
+    image: node:18
+    env_file:
+      - myvars.env
+```
+
+## ➡️ Mount a Configuration File as a Config
+
+```yaml
+services:
+  nginx:
+    image: nginx:latest
+    configs:
+      - source: nginx_config
+        target: /etc/nginx/nginx.conf
+
+configs:
+  nginx_config:
+    file: ./nginx.conf
+```
+
+---
+
 ## 🧪 Example: MongoDB + Backend Service
 
 ```yaml
