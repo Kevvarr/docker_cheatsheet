@@ -156,6 +156,10 @@ echo "secretpassword" > secrets/my_secret.txt
 services:
   app:
     image: myapp:latest
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_DB: mydb
+      POSTGRES_PASSWORD_FILE: run/secrets/my_db_password
     secrets:
       - my_db_password
 
